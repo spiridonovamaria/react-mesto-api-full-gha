@@ -1,0 +1,19 @@
+.header__menu {
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.header__menu:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 649px) and (min-width: 320px) {
+    .header__menu {
+        font-size: 14px;
+        line-height: 16.94px;
+        
+    }
+}

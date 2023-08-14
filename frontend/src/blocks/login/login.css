@@ -1,0 +1,10 @@
+.login {
+    margin: 60px auto 112px;
+    max-width: 358px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    background: #000000;
+}

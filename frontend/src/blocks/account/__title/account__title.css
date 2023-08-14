@@ -1,0 +1,14 @@
+.account__title {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  
+}
+
+@media screen and (max-width: 700px) {
+  .account__title {
+    max-width: 282px;
+    justify-content: center;
+    gap: 10px;
+  }
+}

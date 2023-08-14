@@ -1,0 +1,7 @@
+.elements {
+  overflow-x: hidden;
+  max-width: 880px;
+  min-width: 282px;
+  justify-content:space-between;
+  align-items: center;
+}

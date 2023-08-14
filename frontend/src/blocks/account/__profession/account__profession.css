@@ -1,0 +1,19 @@
+.account__profession {
+  margin: 0;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 400;
+  width: 336px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 700px) {
+  .account__profession {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 282px;
+    text-align: center;
+  }
+}

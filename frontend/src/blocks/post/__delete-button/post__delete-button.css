@@ -1,0 +1,17 @@
+.post__delete-button {
+  height: 19px;
+  width: 18px;
+  background-image: url(../../../images/Trash.svg);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  border: none;
+  cursor: pointer;
+  top: 20px;
+	right: 20px;
+}
+
+.post__delete-button:hover {
+  opacity: 0.6;
+}

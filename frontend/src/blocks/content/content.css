@@ -1,0 +1,6 @@
+.content {
+  box-sizing: border-box;
+  padding: 0 19px 0 19px;
+  justify-content: center;
+  align-items: center;
+}

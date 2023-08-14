@@ -1,0 +1,13 @@
+.post__name {
+  margin: 0;
+  padding: 0;
+  max-width: 246px;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 900;
+  color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+}

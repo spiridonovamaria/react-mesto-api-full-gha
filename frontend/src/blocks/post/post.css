@@ -1,0 +1,11 @@
+.post {
+  max-width: 282px;
+  max-height: 361px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow-y: hidden;
+  display: flex;
+	flex-direction: column;
+  position: relative;
+
+}

@@ -1,0 +1,26 @@
+.account__avatar-button {
+  left: 0;
+  top: 0;
+  padding: 0;
+  height: 120px;
+  width: 120px;
+  background-image: url('../../../images/Vector-avatar.svg');
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: none;
+  object-fit: cover;
+  transition: 0.3s;
+  position: absolute;
+  opacity: 0;
+}
+
+.account__avatar-button:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}

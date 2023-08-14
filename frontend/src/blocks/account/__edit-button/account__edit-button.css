@@ -1,0 +1,25 @@
+.account__edit-button {
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  background: none;
+  background-image: url(../../../images/Vectorкнопка.svg);
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+ 
+}
+
+.account__edit-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 700px) {
+  .account__edit-button {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+
+  }
+}
