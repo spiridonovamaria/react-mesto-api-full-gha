@@ -1,85 +1,99 @@
 const Card = require('../models/card');
-const BadRequest = require('../errors/BadRequest');
-const NotFound = require('../errors/NotFound');
+
 const Forbidden = require('../errors/Forbidden');
+const NotFound = require('../errors/NotFound');
+const BadRequest = require('../errors/BadRequest');
 
-const getInitialCards = (req, res, next) => {
+function getInitialCards(_, res, next) {
   Card.find({})
-    .then((cards) => res.send(cards))
+    .then((cards) => res.send({ data: cards }))
     .catch(next);
-};
+}
 
-const addCard = (req, res, next) => {
+function addCard(req, res, next) {
   const { name, link } = req.body;
-  const owner = req.user._id;
-  Card.create({ name, link, owner })
-    .then((card) => res.status(201).send(card))
+  const { userId } = req.user;
+  Card.create({ name, link, owner: userId })
+    .then((card) => res.status(201).send({ data: card }))
     .catch((error) => {
       if (error.name === 'ValidationError') {
-        return next(new BadRequest('Переданы некорректные данные при добавлении карточки'));
-      } return next(error);
+        next(
+          new BadRequest('Переданы некорректные данные при создании карточки'),
+        );
+      } else {
+        next(error);
+      }
     });
-};
+}
 
-const deleteCard = (req, res, next) => {
+function deleteCard(req, res, next) {
+  const { id: cardId } = req.params;
+  const { userId } = req.user;
+  Card.findById({ _id: cardId })
+    .then((card) => {
+      if (!card) {
+        throw new NotFound('Запрашиваемая карточка не найдена');
+      }
+
+      const { owner: cardOwnerId } = card;
+      if (cardOwnerId.valueOf() !== userId) {
+        throw new Forbidden('Удаление запрещено');
+      }
+
+      return Card.findByIdAndDelete(cardId);
+    })
+    .then((deleted) => {
+      if (!deleted) {
+        throw new NotFound('Карточка удалена');
+      }
+
+      res.send({ data: deleted });
+    })
+    .catch(next);
+}
+
+function addLike(req, res, next) {
   const { cardId } = req.params;
-  Card.findById(cardId)
-    .then((card) => {
-      if (!card) {
-        throw new NotFound('Запрашиваемая карточка не найдена');
-      }
-      if (card.owner.toString() === req.user._id) {
-        return Card.deleteOne(card).then(() => res.status(200).send({ message: 'Карточка удалена' }));
-      } throw new Forbidden('Удаление запрещено');
-    })
-    .catch((error) => {
-      if (error.name === 'CastError') {
-        return next(new BadRequest('Некорректные данные'));
-      } return next(error);
-    });
-};
-
-const addLike = (req, res, next) => {
+  const { userId } = req.user;
   Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
+    cardId,
+    { $addToSet: { likes: userId } },
     { new: true },
   )
     .then((card) => {
-      if (!card) {
-        throw new NotFound('Запрашиваемая карточка не найдена');
-      }
-      return res.status(200).send(card);
+      if (card) return res.send({ data: card });
+      throw new NotFound('Запрашиваемая карточка не найдена');
     })
     .catch((error) => {
       if (error.name === 'CastError') {
         return next(new BadRequest('Некорректные данные'));
       } return next(error);
     });
-};
+}
 
-const deleteLike = (req, res, next) => {
+function deleteLike(req, res, next) {
+  const { cardId } = req.params;
+  const { userId } = req.user;
   Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $pull: { likes: req.user._id } },
+    cardId,
+    { $pull: { likes: userId } },
     { new: true },
   )
     .then((card) => {
-      if (!card) {
-        throw new NotFound('Не найдена запрашиваемая карточка');
-      } return res.status(200).send(card);
+      if (card) return res.send({ data: card });
+      throw new NotFound('Не найдена запрашиваемая карточка');
     })
     .catch((error) => {
       if (error.name === 'CastError') {
         return next(new BadRequest('Некорректные данные'));
       } return next(error);
     });
-};
+}
 
 module.exports = {
   getInitialCards,
   addCard,
-  deleteCard,
   addLike,
   deleteLike,
+  deleteCard,
 };

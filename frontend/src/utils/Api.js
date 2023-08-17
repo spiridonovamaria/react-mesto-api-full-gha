@@ -1,102 +1,112 @@
 class Api {
-  constructor({ url, headers }) {
-    this._url = url;
-    this._headers = headers;
+  constructor(options) {
+    this._url = options.url
   }
 
   _checkRequest(res) {
     if (res.ok) {
-      return res.json();
+      return res.json()
     } else {
-      return Promise.reject(`Произошла ошибка ${res.status}.`);
+      return Promise.reject(`Произошла ошибка ${res.status}.`)
     }
   }
 
   getInitialCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "GET",
-      headers: this._headers
-    })
-      .then((res) => this._checkRequest(res));
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => this._checkRequest(res))
   }
-
 
   getInfoUser() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: this._headers
-    })
-      .then((res) => this._checkRequest(res));
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => this._checkRequest(res))
   }
 
-
   editInfoUser({ name, about }) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify({
         name: name,
         about: about,
-      })
-    })
-      .then((res) => this._checkRequest(res));
+      }),
+    }).then((res) => this._checkRequest(res))
   }
   editAvatarUser(avatar) {
-    return fetch(`${this._url}users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify({
         avatar: avatar,
-      })
-    })
-      .then((res) => this._checkRequest(res));
+      }),
+    }).then((res) => this._checkRequest(res))
   }
 
   addCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify({
         name: name,
         link: link,
-      })
-    })
-      .then((res) => this._checkRequest(res));
+      }),
+    }).then((res) => this._checkRequest(res))
   }
-
 
   addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: "PUT",
-      headers: this._headers
-    })
-      .then((res) => this._checkRequest(res));
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => this._checkRequest(res))
   }
 
   deleteLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: "DELETE",
-      headers: this._headers
-    })
-      .then((res) => this._checkRequest(res));
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => this._checkRequest(res))
   }
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers
-    })
-      .then((res) => this._checkRequest(res));
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => this._checkRequest(res))
   }
-
+  setToken(token) {
+    this._headers.authorization = `Bearer ${token}`
+  }
 }
+
 const api = new Api({
-  /*url: "https://mesto.nomoreparties.co/v1/cohort-65/",
-  headers: {
-    authorization: "f60634d5-63da-4429-b79c-be8f0298c760",
-    "Content-Type": "application/json"
-  }*/
-  url: 'http://localhost:3000'
+  url: "http://localhost:3000",
 })
 
-export default api;
+export default api

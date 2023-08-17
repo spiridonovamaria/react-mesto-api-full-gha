@@ -1,32 +1,32 @@
 const router = require('express').Router();
-const { Joi, celebrate } = require('celebrate');
+const { celebrate, Joi } = require('celebrate');
+
+const { urlPattern } = require('../utils/constants');
 const {
   getUsers,
   getUser,
+  getCurrentUser,
   updateUser,
   editAvatarUser,
-  getCurrentUser,
 } = require('../controllers/users');
 
-const urlPattern = /^(https?:\/\/)?([а-я0-9_-]{1,32}|[a-z0-9_-]{1,32})\.([а-я0-9_-]{1,8}|[a-z0-9_-]\S{1,8})$/i;
-
-router.get('/users', getUsers);
-router.get('/users/:userId', celebrate({
+router.get('/', getUsers);
+router.get('/me', getCurrentUser);
+router.get('/:id', celebrate({
   params: Joi.object().keys({
-    _id: Joi.string().hex().length(24).required(),
+    id: Joi.string().length(24).hex().required(),
   }),
 }), getUser);
-router.patch('/users/me', celebrate({
+router.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
   }),
 }), updateUser);
-router.patch('/users/me/avatar', celebrate({
+router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().pattern(urlPattern),
+    avatar: Joi.string().pattern(urlPattern),
   }),
 }), editAvatarUser);
-router.get('/users/me', getCurrentUser);
 
 module.exports = router;

@@ -1,11 +1,10 @@
 const BASE_URL = "http://localhost:3000"
 
 const checkRequest = (res) => {
-    if (res.ok) {
-        return res.json();
-    } else {
-        return Promise.reject(`Произошла ошибка ${res.status}.`);
-    }
+if (!res.ok) {
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+  return res.json()
 }
 
 export const register = (password, email) => {
@@ -41,8 +40,9 @@ export const getContent = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            authorization: `Bearer ${token}`,
         },
     })
         .then((res) => checkRequest(res));
 };
+

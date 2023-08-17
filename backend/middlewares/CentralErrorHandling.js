@@ -1,11 +1,8 @@
-const CentralErrorHandling = (err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
+const CentralErrorHandling = (err, _, res, next) => {
+  const statusCode = err.statusCode || 500;
 
-  res.status(statusCode).send({
-    message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
-  });
-
+  const message = statusCode === 500 ? 'На сервере произошла ошибка' : err.message;
+  res.status(statusCode).send({ message });
   next();
 };
 
