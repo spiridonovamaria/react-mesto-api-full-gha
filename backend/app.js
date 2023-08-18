@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const limiter = require('./middlewares/rateLimiter');
-const cors = require('./middlewares/cors');
+const cors = require('cors')
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const signup = require('./routes/signup');
 const signin = require('./routes/signin');
@@ -37,7 +37,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-app.use(cors({ origin: ['https://localhost:3000', 'http://mariaspiridon.students.nomoreparties.co', 'http://api.mariaspiridon.students.nomoreparties.co'] }));
+app.use(cors());
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
