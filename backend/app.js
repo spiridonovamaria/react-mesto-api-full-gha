@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const signup = require('./routes/signup');
@@ -42,9 +41,9 @@ const allowedCors = [
   'http://spiridon.nomoreparties.co',
   'http://api.spiridon.nomoreparties.co',
   'localhost:3000',
-  'localhost:3000',
+  'localhost:3001',
 ];
-
+// eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
