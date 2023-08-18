@@ -37,7 +37,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-app.use(cors({ origin: ['https://localhost:3000', 'http://mariaspiridon.students.nomoreparties.co', 'http://app.nomoreparties.co'] }));
+app.use(cors({ origin: ['https://localhost:3000', 'http://mariaspiridon.students.nomoreparties.co', 'http://api.mariaspiridon.students.nomoreparties.co'] }));
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
