@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.57.65
+IP-адрес <158.160.57.65>
 
 Frontend https://spiridon.nomoreparties.co,
 
