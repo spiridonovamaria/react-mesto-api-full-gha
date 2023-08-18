@@ -1,4 +1,5 @@
 const BASE_URL = "http://api.mariaspiridon.students.nomoreparties.co"
+/*const BASE_URL = "http://localhost:3000"*/
 
 const checkRequest = (res) => {
 if (!res.ok) {

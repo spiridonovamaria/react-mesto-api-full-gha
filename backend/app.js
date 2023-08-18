@@ -40,6 +40,8 @@ app.use(requestLogger);
 const allowedCors = [
   'https://mariaspiridon.nomoreparties.co',
   'https://api.mariaspiridon.nomoreparties.co',
+  'http://mariaspiridon.nomoreparties.co',
+  'http://api.mariaspiridon.nomoreparties.co',
   'http://localhost:3000',
 ];
 
