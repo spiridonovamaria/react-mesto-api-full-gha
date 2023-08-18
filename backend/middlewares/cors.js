@@ -1,8 +1,6 @@
 const allowedCors = [
-  /*'http://api.spiridon.nomoreparties.co',
-  'http://spiridon.students.nomoreparties.co',
-  'https://api.spiridon.nomoreparties.co',
-  'https://spiridon.students.nomoreparties.co'*/,
+  'https://',
+  'http://',
   'https://localhost:3000',
   'http://localhost:3000',
   'https://localhost:3001',
