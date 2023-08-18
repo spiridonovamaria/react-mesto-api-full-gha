@@ -106,7 +106,7 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://api.mariaspiridon.students.nomoreparties.co",
+  url: "https://api.spiridon.nomoreparties.co",
   /*url: "http://localhost:3000"*/
 })
 

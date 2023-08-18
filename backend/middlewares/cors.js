@@ -1,8 +1,8 @@
 const allowedCors = [
-  'http://api.mariaspiridon.students.nomoreparties.co',
-  'http://mariaspiridon.students.nomoreparties.co',
-  'https://api.mariaspiridon.students.nomoreparties.co',
-  'https://mariaspiridon.students.nomoreparties.co',
+  'http://api.spiridon.nomoreparties.co',
+  'http://spiridon.students.nomoreparties.co',
+  'https://api.spiridon.nomoreparties.co',
+  'https://spiridon.students.nomoreparties.co',
   'https://localhost:3000',
   'http://localhost:3000',
   'https://localhost:3001',
