@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const signup = require('./routes/signup');
@@ -37,17 +37,8 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
-const allowedCors = [
-  'https://mariaspiridon.nomoreparties.co',
-  'https://api.mariaspiridon.nomoreparties.co',
-  'http://mariaspiridon.nomoreparties.co',
-  'http://api.mariaspiridon.nomoreparties.co',
-  'http://localhost:3000',
-];
 
-app.use(cors({
-  origin: allowedCors,
-}));
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
