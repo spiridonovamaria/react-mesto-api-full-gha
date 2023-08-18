@@ -11,6 +11,6 @@
 
 IP-адрес x.x.x.x
 
-Frontend https://...
+Frontend https://spiridon.nomoreparties.co,
 
-Backend https://...
+Backend https://api.spiridon.nomoreparties.co
