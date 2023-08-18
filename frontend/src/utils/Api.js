@@ -106,7 +106,7 @@ class Api {
 }
 
 const api = new Api({
-  url: "http://localhost:3000",
+  url: "http://api.mariaspiridon.students.nomoreparties.co",
 })
 
 export default api
