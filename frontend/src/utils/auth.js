@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3001"
+/*const BASE_URL = "http://localhost:3001"*/
+const BASE_URL = "https://api.spiridon.nomoreparties.co"
 
 const checkRequest = (res) => {
 if (!res.ok) {

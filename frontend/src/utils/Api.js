@@ -106,8 +106,8 @@ class Api {
 }
 
 const api = new Api({
-  
-  url: "http://localhost:3001"
+ url: "https://api.spiridon.nomoreparties.co"
+  /*url: "http://localhost:3001"*/
 })
 
 export default api
